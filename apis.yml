@@ -1,17 +1,38 @@
 aid: aescape
 name: Aescape
-description: 'Aescape is a company surfaced via the API Evangelist harvest backlog (source: secondary-market)
-  and added to the network as a stub for full-pipeline profiling.'
+description: 'Aescape is a New York City lifestyle-robotics company, founded in 2017
+  by Eric Litman, that builds a fully automated AI-powered robotic massage platform.
+  Its table uses sensors and computer vision to map over one million 3D data points
+  of a person''s body, then drives heated robotic arms through massage techniques at
+  a user-selected pressure, duration and focus area, with sessions booked and controlled
+  through a mobile/web app. Sessions run 15 to 60 minutes and the tables are deployed
+  in Equinox clubs, Four Seasons, Marriott and Ritz-Carlton properties, spas and corporate
+  wellness sites across North America, alongside an Aescape One home product. Aescape
+  publishes no public developer API: its consumer app is served by a private AWS API
+  Gateway host (api.aescape.com) and its developer documentation site (developer.aescape.com)
+  is gated behind HTTP Basic auth. The one machine-readable, anonymously reachable
+  contract Aescape does publish is the OpenID Connect discovery document for its Zitadel
+  identity tenant.'
 url: https://raw.githubusercontent.com/api-evangelist/aescape/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
+x-tier: profiled
+x-tier-reason: enrichment-pipeline
+image: https://aescape-assets.b-cdn.net/_1200x630_crop_center-center_82_none/Garrett-Table-Hero.jpg?mtime=1708106180
 specificationVersion: '0.20'
 created: '2026-07-31'
 modified: '2026-07-31'
 tags:
 - Company
+- Robotics
+- Health and Wellness
+- Fitness
+- Massage
+- Artificial Intelligence
+- Consumer Hardware
+- Hospitality
+- Recovery
+- Identity
 apis: []
 maintainers:
 - FN: Kin Lane
@@ -20,4 +41,55 @@ maintainers:
   email: info@apis.io
 common:
 - type: Website
-  url: https://forgeglobal.com/aescape_stock/
+  url: https://www.aescape.com/
+- type: About
+  url: https://www.aescape.com/about
+- type: Blog
+  url: https://www.aescape.com/news
+- type: Press
+  url: https://www.aescape.com/press
+- type: Support
+  url: https://www.aescape.com/faqs
+- type: Contact
+  url: https://www.aescape.com/contact
+- type: Pricing
+  url: https://www.aescape.com/sessions
+- type: SignUp
+  url: https://app.aescape.com/
+- type: TermsOfService
+  url: https://www.aescape.com/terms
+- type: PrivacyPolicy
+  url: https://www.aescape.com/privacy
+- type: GitHubOrganization
+  url: https://github.com/aescape-inc
+- type: Partners
+  url: https://www.aescape.com/partner
+- type: Careers
+  url: https://www.aescape.com/careers
+- type: Technology
+  url: https://www.aescape.com/technology
+- type: Locations
+  url: https://app.aescape.com/map
+- type: Store
+  url: https://store.aescape.com/
+- type: Manual
+  url: https://www.aescape.com/manual
+- type: WellKnown
+  url: well-known/aescape-well-known.yml
+- type: Authentication
+  url: authentication/aescape-authentication.yml
+- type: OAuthScopes
+  url: scopes/aescape-scopes.yml
+- type: OpenIDConnect
+  url: well-known/aescape-openid-configuration.json
+- type: Conformance
+  url: conformance/aescape-conformance.yml
+- type: DomainSecurity
+  url: security/aescape-domain-security.yml
+- type: LLMsTxt
+  url: llms/aescape-llms.txt
+x-enrichment:
+  date: '2026-07-31'
+  status: enriched
+  artifacts_added: 7
+  pass: local-v1

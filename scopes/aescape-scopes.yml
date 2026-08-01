@@ -1,0 +1,59 @@
+generated: '2026-07-31'
+method: probed
+source: https://aescape-8ocoec.zitadel.cloud/.well-known/openid-configuration
+note: >-
+  Scopes are read verbatim from scopes_supported in the OIDC discovery document of
+  Aescape's production Zitadel tenant. Aescape publishes no OpenAPI and no public
+  scopes/permissions reference page, so this is the complete publicly advertised
+  scope surface. These are the standard OpenID Connect scopes; no Aescape-specific
+  application scopes (for example massage session, booking or device scopes) are
+  publicly advertised.
+docs: null
+schemes:
+- name: AescapeOIDC
+  source: well-known/aescape-openid-configuration.json
+  issuer: https://aescape-8ocoec.zitadel.cloud
+  flows:
+  - flow: authorizationCode
+    authorizationUrl: https://aescape-8ocoec.zitadel.cloud/oauth/v2/authorize
+    tokenUrl: https://aescape-8ocoec.zitadel.cloud/oauth/v2/token
+    pkce: S256
+  - flow: clientCredentials
+    tokenUrl: https://aescape-8ocoec.zitadel.cloud/oauth/v2/token
+  - flow: deviceCode
+    deviceAuthorizationUrl: https://aescape-8ocoec.zitadel.cloud/oauth/v2/device_authorization
+    tokenUrl: https://aescape-8ocoec.zitadel.cloud/oauth/v2/token
+  - flow: implicit
+    authorizationUrl: https://aescape-8ocoec.zitadel.cloud/oauth/v2/authorize
+scopes:
+- scope: openid
+  description: Required OpenID Connect scope; requests an ID token identifying the
+    end user.
+  standard: OpenID Connect Core 1.0
+  sources: [well-known/aescape-openid-configuration.json]
+- scope: profile
+  description: Access to the end user's default profile claims — name, family_name,
+    given_name, preferred_username, locale.
+  standard: OpenID Connect Core 1.0
+  sources: [well-known/aescape-openid-configuration.json]
+- scope: email
+  description: Access to the email and email_verified claims.
+  standard: OpenID Connect Core 1.0
+  sources: [well-known/aescape-openid-configuration.json]
+- scope: phone
+  description: Access to the phone_number and phone_number_verified claims.
+  standard: OpenID Connect Core 1.0
+  sources: [well-known/aescape-openid-configuration.json]
+- scope: address
+  description: Access to the end user's address claim.
+  standard: OpenID Connect Core 1.0
+  sources: [well-known/aescape-openid-configuration.json]
+- scope: offline_access
+  description: Requests a refresh token so the client can obtain new access tokens
+    without the end user present.
+  standard: OpenID Connect Core 1.0
+  sources: [well-known/aescape-openid-configuration.json]
+coverage:
+  scopes_total: 6
+  standard_oidc: 6
+  application_specific: 0

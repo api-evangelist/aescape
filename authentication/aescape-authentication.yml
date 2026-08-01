@@ -1,0 +1,68 @@
+generated: '2026-07-31'
+method: probed
+source: https://aescape-8ocoec.zitadel.cloud/.well-known/openid-configuration
+note: >-
+  Aescape publishes no OpenAPI, so this profile is not derived from a spec. It is
+  read verbatim from the OpenID Connect discovery document served by Aescape's
+  production Zitadel identity tenant, which is the only anonymously reachable
+  machine-readable auth contract in the estate. The application API host
+  (api.aescape.com) and the developer documentation site (developer.aescape.com)
+  publish no auth documentation publicly; developer.aescape.com is itself gated
+  behind HTTP Basic auth.
+summary:
+  types: [openIdConnect, oauth2]
+  api_key_in: []
+  oauth2_flows: [authorizationCode, implicit, clientCredentials, deviceCode, jwtBearer]
+  pkce: [S256]
+  identity_provider: Zitadel (hosted)
+  provider_managed: true
+schemes:
+- name: AescapeOIDC
+  type: openIdConnect
+  openIdConnectUrl: https://aescape-8ocoec.zitadel.cloud/.well-known/openid-configuration
+  issuer: https://aescape-8ocoec.zitadel.cloud
+  sources: [well-known/aescape-openid-configuration.json]
+  endpoints:
+    authorization: https://aescape-8ocoec.zitadel.cloud/oauth/v2/authorize
+    token: https://aescape-8ocoec.zitadel.cloud/oauth/v2/token
+    userinfo: https://aescape-8ocoec.zitadel.cloud/oidc/v1/userinfo
+    jwks: https://aescape-8ocoec.zitadel.cloud/oauth/v2/keys
+    introspection: https://aescape-8ocoec.zitadel.cloud/oauth/v2/introspect
+    revocation: https://aescape-8ocoec.zitadel.cloud/oauth/v2/revoke
+    end_session: https://aescape-8ocoec.zitadel.cloud/oidc/v1/end_session
+    device_authorization: https://aescape-8ocoec.zitadel.cloud/oauth/v2/device_authorization
+    registration: null
+  grant_types:
+  - authorization_code
+  - implicit
+  - refresh_token
+  - client_credentials
+  - urn:ietf:params:oauth:grant-type:jwt-bearer
+  - urn:ietf:params:oauth:grant-type:device_code
+  response_types: [code, id_token, id_token token]
+  response_modes: [query, fragment, form_post]
+  code_challenge_methods: [S256]
+  token_endpoint_auth_methods: [none, client_secret_basic, client_secret_post, private_key_jwt]
+  id_token_signing_algs: [EdDSA, RS256, RS384, RS512, ES256, ES384, ES512]
+  subject_types: [public]
+  backchannel_logout_supported: true
+  backchannel_logout_session_supported: true
+  request_parameter_supported: true
+  request_uri_parameter_supported: false
+  claims_supported: [sub, aud, exp, iat, iss, auth_time, nonce, acr, amr, c_hash, at_hash,
+    act, scopes, client_id, azp, preferred_username, name, family_name, given_name,
+    locale, email, email_verified, phone_number, phone_number_verified]
+  scopes: scopes/aescape-scopes.yml
+observations:
+- The consumer application at app.aescape.com declares three Zitadel tenants in its
+  Content-Security-Policy — production (aescape-8ocoec), QA (aescape-qa-aotwzf) and
+  dev (aescape-dev-bi5ra8) — plus an Auth0 connect-src (*.us.auth0.com). Only the
+  production tenant is profiled here.
+- Non-production tenants also serve a 200 OIDC discovery document but are deliberately
+  not harvested as Aescape's published contract.
+- implicit is advertised as a supported grant type by the tenant. This is the Zitadel
+  platform default and is not evidence that Aescape uses it.
+gaps:
+- No public API authentication documentation exists for api.aescape.com.
+- No API key, bearer-token or mTLS scheme is publicly documented.
+- The developer documentation that would carry an auth guide is behind HTTP Basic auth.

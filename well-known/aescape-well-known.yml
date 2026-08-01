@@ -1,0 +1,84 @@
+generated: '2026-07-31'
+method: searched
+source: live probes of every Aescape host on 2026-07-31
+summary: >-
+  Aescape serves no /.well-known/ document from any host it owns. The only
+  anonymously reachable machine-readable discovery document in the Aescape
+  estate is the OpenID Connect configuration for its production Zitadel
+  identity tenant, which is saved here verbatim. Every 200 returned by
+  app.aescape.com is the Flutter single-page-app catch-all (text/html) and is
+  recorded as a false positive, not a hit.
+hosts:
+- host: https://aescape-8ocoec.zitadel.cloud
+  role: Aescape production identity tenant (Zitadel)
+  documents:
+  - path: /.well-known/openid-configuration
+    standard: OpenID Connect Discovery 1.0
+    status: 200
+    content_type: application/json
+    file: aescape-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    standard: RFC 8414
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    standard: RFC 9728
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/security.txt
+    standard: RFC 9116
+    status: 404
+- host: https://www.aescape.com
+  role: marketing site
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+  - {path: /security.txt, status: 404}
+- host: https://api.aescape.com
+  role: private application API host (AWS API Gateway)
+  documents:
+  - {path: /.well-known/security.txt, status: 404}
+  - {path: /.well-known/openid-configuration, status: 404}
+  - {path: /.well-known/oauth-authorization-server, status: 404}
+  - {path: /.well-known/oauth-protected-resource, status: 404}
+  - {path: /.well-known/api-catalog, status: 404}
+  - {path: /.well-known/ai-plugin.json, status: 404}
+  - {path: /.well-known/agent-card.json, status: 404}
+  - {path: /.well-known/agent.json, status: 404}
+- host: https://developer.aescape.com
+  role: developer documentation site, HTTP Basic auth gated
+  documents:
+  - {path: /.well-known/security.txt, status: 401}
+  - {path: /.well-known/openid-configuration, status: 401}
+  - {path: /.well-known/oauth-authorization-server, status: 401}
+  - {path: /.well-known/oauth-protected-resource, status: 401}
+  - {path: /.well-known/api-catalog, status: 401}
+  - {path: /.well-known/agent-card.json, status: 401}
+  - {path: /.well-known/agent.json, status: 401}
+  note: every path on this host returns 401 with WWW-Authenticate Basic realm="Developer
+    Docs"; nothing here is publicly readable.
+- host: https://app.aescape.com
+  role: consumer booking application (Flutter web SPA)
+  documents:
+  - {path: /.well-known/security.txt, status: 200, rejected: true}
+  - {path: /.well-known/openid-configuration, status: 200, rejected: true}
+  - {path: /.well-known/oauth-authorization-server, status: 200, rejected: true}
+  - {path: /.well-known/oauth-protected-resource, status: 200, rejected: true}
+  - {path: /.well-known/api-catalog, status: 200, rejected: true}
+  - {path: /.well-known/ai-plugin.json, status: 200, rejected: true}
+  - {path: /.well-known/agent-card.json, status: 200, rejected: true}
+  - {path: /.well-known/agent.json, status: 200, rejected: true}
+  note: this host answers 200 with the same text/html SPA shell for every path. All
+    of these are single-page-app catch-all false positives and none is a real
+    well-known document.
+x-evidence:
+  fetched: '2026-07-31'
+  openid_configuration_url: https://aescape-8ocoec.zitadel.cloud/.well-known/openid-configuration
+  http_status: 200
+  content_type: application/json

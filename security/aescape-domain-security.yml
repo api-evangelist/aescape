@@ -1,0 +1,71 @@
+generated: '2026-07-31'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml hosts + hosts observed in the app.aescape.com
+  Content-Security-Policy
+hosts:
+- host: www.aescape.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 26 05:05:49 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+  role: marketing site (Vercel / Next.js)
+- host: app.aescape.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb 10 23:59:59 2027 GMT
+  hsts: true
+  hsts_max_age: 31536000
+  hsts_include_subdomains: true
+  role: consumer booking application (Flutter web SPA)
+- host: api.aescape.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Feb  9 23:59:59 2027 GMT
+  hsts: false
+  role: private application API host (AWS API Gateway; apigw-requestid header present,
+    every probed path returns 404 {"message":"Not Found"})
+- host: developer.aescape.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 20 22:37:19 2026 GMT
+  hsts: false
+  role: developer documentation site, gated behind HTTP Basic auth (WWW-Authenticate;
+    realm "Developer Docs", fronted by Cloudflare) — returns 401 on every path
+- host: store.aescape.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct  4 08:14:02 2026 GMT
+  hsts: true
+  hsts_max_age: 7889238
+  role: Shopify storefront (gifts and packages)
+- host: aescape-8ocoec.zitadel.cloud
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Oct 22 01:31:45 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+  hsts_include_subdomains: true
+  hsts_preload: true
+  role: Aescape production identity tenant (Zitadel), serves the OpenID Connect discovery
+    document
+  third_party_domain: true
+domains:
+- domain: aescape.com
+  dnssec: false
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: quarantine
+- domain: zitadel.cloud
+  dnssec: true
+  caa: []
+  spf: true
+  dmarc: true
+  dmarc_policy: none
+  note: third-party identity platform domain hosting the Aescape tenant, recorded for
+    completeness — not under Aescape control
+notes:
+- No CAA records are published on aescape.com.
+- DNSSEC is not enabled on aescape.com.
+- No /.well-known/security.txt was served on any Aescape host (see well-known/aescape-well-known.yml).
