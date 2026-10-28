@@ -64,30 +64,93 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Aescape is a New York City lifestyle-robotics company, founded in 2017 by Eric Litman, that builds a fully automated AI-powered robotic massage platform. Its table uses sensors and computer vision to map over one million 3D data points of a person's body, then drives heated robotic arms through massage techniques at a user-selected pressure, duration and focus area. Sessions run 15 to 60 minutes and are booked through a mobile and web app. Tables are deployed in Equinox clubs, Four Seasons, Marriott and Ritz-Carlton properties, spas and corporate wellness sites across North America, alongside an Aescape One home product.
+Aescape is a New York City lifestyle-robotics company, founded in 2017 by Eric Litman, that builds a fully automated AI-powered robotic massage platform. Its table uses sensors and computer vision to map over one million 3D data points of a person's body, then drives heated robotic arms through massage techniques at a user-selected pressure, duration and focus area, with sessions booked and controlled through a mobile/web app. Sessions run 15 to 60 minutes and the tables are deployed in Equinox clubs, Four Seasons, Marriott and Ritz-Carlton properties, spas and corporate wellness sites across North America, alongside an Aescape One home product. Aescape publishes no public developer API: its consumer app is served by a private AWS API Gateway host (api.aescape.com) and its developer documentation site (developer.aescape.com) is gated behind HTTP Basic auth. The one machine-readable, anonymously reachable contract Aescape does publish is the OpenID Connect discovery document for its Zitadel identity tenant.
 
-- https://www.aescape.com/
+**Areas:** Company · Robotics · Health and Wellness · Fitness · Massage · Artificial Intelligence · Consumer Hardware · Hospitality · Recovery · Identity
 
-## API posture
+## Aescape on APIs.io
 
-Aescape publishes **no public developer API**. Contract discovery was run against every host on 2026-07-31 and found no OpenAPI, AsyncAPI, GraphQL, MCP server or A2A agent card.
+Everything profiled for Aescape is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/aescape/](https://apis.io/providers/aescape/)** — or go straight to one of the APIs or properties below.
 
-| Host | What it is | Public contract |
-|---|---|---|
-| `api.aescape.com` | AWS API Gateway serving the consumer app | none — every path returns 404 `{"message":"Not Found"}` |
-| `developer.aescape.com` | Developer documentation site | none — 401 on every path, `WWW-Authenticate: Basic realm="Developer Docs"` |
-| `app.aescape.com` | Flutter web SPA (booking) | none — 200 HTML catch-all on every path, including `/.well-known/*` |
-| `aescape-8ocoec.zitadel.cloud` | Aescape production identity tenant | **OpenID Connect discovery document (200)** |
+### Published properties
 
-The one anonymously reachable machine-readable contract in the estate is the OIDC discovery document for Aescape's Zitadel identity tenant. It is saved verbatim and profiled into `authentication/` and `scopes/`.
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Artifacts
+#### Security (2)
 
-- `well-known/` — every `/.well-known/` path probed with status, plus the OIDC discovery document verbatim
-- `authentication/` — identity profile (OIDC, PKCE S256, five grant types)
-- `scopes/` — the six advertised OIDC scopes; no Aescape-specific application scopes are published
-- `conformance/` — standards conformance plus the full contract-discovery record
-- `security/` — TLS, HSTS, DNSSEC, CAA, SPF and DMARC posture
-- `llms/` — generated llms.txt (Aescape serves none)
+Authentication, trust centre, and vulnerability disclosure.
 
-No `a2a/`, `mcp/`, `openapi/`, `asyncapi/`, `packages/` or `skills/` directory exists because no such artifact was found. Nothing was authored on Aescape's behalf.
+- [Aescape Authentication](https://apis.io/security/aescape/aescape-authentication/)
+- [Aescape Domain Security](https://apis.io/security/aescape/aescape-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Aescape Scopes](https://apis.io/scopes/aescape/aescape-scopes/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.aescape.com/)
+- [Pricing](https://www.aescape.com/sessions)
+- [Sign up](https://app.aescape.com/)
+- [Support](https://www.aescape.com/faqs)
+- [Blog](https://www.aescape.com/news)
+- [Terms of service](https://www.aescape.com/terms)
+- [Privacy policy](https://www.aescape.com/privacy)
+- [GitHub](https://github.com/aescape-inc)
+
+## API Evangelist rating
+
+**Kin Score 21.1** — emerging · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 56.3 |
+| Contract quality | 0.0 |
+| Contract governance | 18.2 |
+| Operational transparency | 2.6 |
+| Developer ergonomics | 19.0 |
+| Access clarity | 31.6 |
+
+**Agent readiness 13.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | — |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 30.9** — Health
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/aescape/](https://apis.io/providers/aescape/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Aescape: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/aescape/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
